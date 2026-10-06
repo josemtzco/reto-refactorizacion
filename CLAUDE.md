@@ -9,8 +9,8 @@ legado que se refactoriza como reto académico: el objetivo es mejorar la calida
 
 | Módulo | Responsabilidad |
 |---|---|
-| `src/gestor.py` | Núcleo del negocio. Estado global (`INVENTARIO`, `VENTAS`, `contadorVentas`, `ultimo_error`), alta/baja/actualización/búsqueda de productos, `registrar_venta` (validación, descuentos por volumen y VIP, IVA 16 %, folio, ticket) y `cotizar`. |
-| `src/almacen.py` | Persistencia en JSON: `guardar_datos`, `cargar_datos` (claves `inventario`, `ventas`, `contador`) y `hayArchivo`. Escribe `gestor.ultimo_error` en fallos. |
+| `src/gestor.py` | Núcleo del negocio. Estado global (`INVENTARIO`, `VENTAS`, `contador_ventas`, `ultimo_error`), alta/baja/actualización/búsqueda de productos, `registrar_venta` (validación, descuentos por volumen y VIP, IVA 16 %, folio, ticket) y `cotizar`. |
+| `src/almacen.py` | Persistencia en JSON: `guardar_datos`, `cargar_datos` (claves `inventario`, `ventas`, `contador`) y `hay_archivo`. Escribe `gestor.ultimo_error` en fallos. |
 | `src/reportes.py` | Reportes: productos con stock bajo (< 5), reporte de inventario, total vendido, más vendidos y resumen de ventas. `reporte_inventario` y `resumen_ventas` imprimen **y** regresan el texto. |
 | `src/main.py` | Punto de entrada: menú interactivo por consola que orquesta los otros tres módulos usando `datos_ejemplo.json`. |
 | `tests/` | Pruebas de caja negra (`test_gestor.py`, `test_almacen.py`, `test_reportes.py`). `conftest.py` añade `src/` al `sys.path` y llama a `gestor.reiniciar_sistema()` antes y después de cada prueba. |
@@ -141,6 +141,12 @@ Para cada fase `Rn`:
    Los commits que no son de refactorización usan otro tipo (`docs:`, `chore:`).
 
 ## 6. Aclaraciones por iteración
+
+> Estado final (R1–R24 hechas): esta sección es el historial de las instrucciones que
+> se dieron en cada iteración. Los nombres viejos que aparecen aquí (`hayArchivo`,
+> `contadorVentas`, `temp2`, `aux`, `reporteViejoCSV`, etc.) ya no existen en `src/`.
+> Los únicos nombres públicos con camelCase que se conservan son `agregarProducto` y
+> `buscarProducto`.
 
 ### Iteración 1 — Paso 0, R1, R2, R3
 
@@ -378,7 +384,7 @@ edición propia, sin efecto; el aviso `LF → CRLF` de git es solo `autocrlf`.
 **R20 — cláusulas de guarda en `registrar_venta`**
 
 - Orden exacto: `codigo in (None, "")` → `"codigo vacio"`; `codigo not in INVENTARIO`
-  → `"producto no existe"`; `cantidad is None or cantidad <= 0` →
+  → `"producto no existe"`; `cantidad is None or not cantidad > 0` →
   `"cantidad invalida"`; `INVENTARIO[codigo]["stock"] < cantidad` →
   `"stock insuficiente"`.
 - Se permite renombrar `temp2` → `producto` en esta fase, porque desaparece el
