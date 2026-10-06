@@ -320,3 +320,39 @@ otros comandos fue bloqueado por el sandbox; ejecuta cada paso por separado.
 - `codigo in (None, "")`, **no** `not codigo` (con `0` cambiaría el resultado; el
   script de referencia lo prueba).
 - Mismo orden de validación: código vacío → ya existe → precio → stock.
+
+---
+
+### Iteración 6 — R16, R17, R18
+
+**Lecciones de la iteración anterior:** ninguna de código en la iteración 5 (R13-R15
+sin incidencias). Nota de proceso: ejecuta cada paso de PowerShell por separado (no
+encadenes comandos como `Remove-Item` con otros).
+
+**R16 — comprensión en `buscarProducto`**
+
+- El nombre `buscarProducto` **no** cambia.
+- Forma elegida: `[p for p in INVENTARIO.values() if texto.lower() in
+  p["nombre"].lower()]`. La auditoría proponía calcular `texto.lower()` una sola vez
+  antes; **no se hace**, porque con el inventario vacío y un `texto` que no es
+  cadena el código original regresa `[]` y el nuevo lanzaría un error. Es un cambio
+  de comportamiento, aunque sea pequeño, y la regla inviolable manda. Anótalo en la
+  bitácora.
+
+**R17 — `contador_ventas`**
+
+- Renombrar en **todos** los sitios en el mismo commit: la declaración, los dos
+  `global` (`reiniciar_sistema`, `registrar_venta`), sus usos en `registrar_venta`,
+  y en `almacen.py` (`guardar_datos` y `cargar_datos`).
+- La clave JSON sigue siendo `"contador"`. Al final, `Grep "contadorVentas" src`
+  debe dar 0 resultados.
+
+**R18 — `_descuento_por_volumen(subtotal)` compartida**
+
+- La usan `registrar_venta` **y** `cotizar`. Con cláusulas de guarda:
+  `if subtotal >= UMBRAL_DESCUENTO_ALTO: return subtotal * TASA_DESCUENTO_ALTO`,
+  igual con el medio y al final **`return 0` (entero, no `0.0`)**. Con `0.0`, la
+  venta guardaría `"descuento": 0.0` en vez de `0` y cambiaría el JSON (el `repr`
+  del script de referencia lo detecta).
+- Hint: `-> float` (un `int` es válido donde se espera `float`).
+- El VIP no se toca aquí (es R19).
