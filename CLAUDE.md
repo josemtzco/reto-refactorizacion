@@ -394,3 +394,50 @@ edición propia, sin efecto; el aviso `LF → CRLF` de git es solo `autocrlf`.
   ticket necesita el descuento sin redondear para la condición `> 0`.
 - `aux` → `subtotal`, `desc` → `descuento`. No construyas el dict de la venta aquí.
 
+---
+
+### Iteración 8 — R22, R23, R24 y cierre
+
+**Lecciones de la iteración anterior:** en la iteración 7, al validar `cantidad` con
+`cantidad is None or cantidad <= 0` (R20) se perdió un caso del original: con `NaN`
+el original rechazaba (`NaN > 0` es falso), pero `NaN <= 0` también es falso, así que
+la versión nueva lo dejaba pasar. Se corrige en R22 con
+`cantidad is None or not cantidad > 0` (en `registrar_venta` y `cotizar`), mismo
+mensaje y mismo orden. Lección: al invertir una comparación, `not (a > b)` no es lo
+mismo que `a <= b` cuando hay `NaN`.
+
+**R22 — `_construir_ticket(venta, descuento)`**
+
+- f-strings con exactamente las mismas líneas y `\n`. `f"{x}"` da el mismo texto que
+  `str(x)` para `int` y `float`.
+- La línea `Descuento: -$...` aparece solo si `descuento > 0`, con el descuento
+  **sin redondear** (el que regresa `_calcular_montos`).
+
+**R23 — menú con diccionario**
+
+- Una función por opción (`_opcion_agregar_producto`, `_opcion_registrar_venta`,
+  `_opcion_cotizar`, …) y `OPCIONES = {"1": ..., "7": ...}`. La opción `"8"` es un
+  caso especial del bucle (guarda, imprime y hace `break`). Cualquier otra entrada
+  imprime `"Opcion no valida."`.
+- **Los textos no cambian ni un carácter:** prompts de `input`, mensajes,
+  `print("")` y textos sin acentos (`"Opcion"`, `"Mas vendidos"`). No "corrijas" la
+  ortografía de lo que ve el usuario.
+- `print("Error:", gestor.ultimo_error)` puede quedarse con coma (el espacio lo pone
+  `print`).
+- Aquí sí se renombran `c`, `n`, `p`, `s`, `cant`, `cli`, `v`, `t`, `op`.
+- `menu` debe quedar con complejidad ≤ 10. Prueba manual del menú en el checkpoint.
+
+**R24 — type hints restantes**
+
+- Solo las funciones que aún no tienen hints. Tipos simples: `str`, `int`, `float`,
+  `bool`, `dict`, `list[dict]`, `str | None`, `dict | None`, `float | None`, `-> None`.
+  Nada de `TypedDict` ni `typing.Any` (regla de lo más simple).
+- Los hints no se comprueban al ejecutar: no cambian el comportamiento.
+- Meta: `ruff check src` → `All checks passed!`.
+
+**Cierre**
+
+- Revisa que la sección `## 6. Aclaraciones por iteración` de `CLAUDE.md` siga
+  siendo cierta con el código final (nombres viejos como `hayArchivo` o
+  `contadorVentas` ya no existen) y corrígela en el commit `docs:` del cierre.
+
