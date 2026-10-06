@@ -139,3 +139,62 @@ Para cada fase `Rn`:
    `refactor(Rn): <descripción en español>`
    (p. ej. `refactor(R21): extraer cálculo de montos de la venta`).
    Los commits que no son de refactorización usan otro tipo (`docs:`, `chore:`).
+
+## 6. Aclaraciones por iteración
+
+### Iteración 1 — Paso 0, R1, R2, R3
+
+**Paso 0: script de referencia (`scripts/salida_referencia.py`)**
+
+- **Escribe la salida a un archivo desde Python**, no con `>`: en Windows PowerShell
+  `>` puede guardar en UTF-16 o con BOM, y entonces `git diff` lo trata como binario.
+  El script recibe la ruta destino como argumento y usa
+  `open(ruta, "w", encoding="utf-8")`. Los comandos quedan así:
+  `.venv\Scripts\python scripts\salida_referencia.py scripts\referencia_base.txt`
+  (y `scripts\referencia_actual.txt` en cada fase).
+- **Nunca imprimas la clave `fecha`** de una venta (`datetime.now()`): la salida
+  cambiaría en cada corrida. Imprime la venta sin esa clave, y lo mismo con el JSON
+  guardado.
+- Imprime las ventas y los resultados con `repr(...)`, no solo con `print`, para
+  detectar cambios de tipo como `0` → `0.0` (importa en R18).
+- Casos mínimos que debe cubrir, además de los de §4 del agente:
+  - Bordes del descuento: subtotal exacto de 500, de 1000 y uno menor a 500.
+  - VIP: `"VIP01"` con base mayor a 200; `"VIP01"` con subtotal exacto de 200 (no
+    aplica, la condición es `> 200`); `"VIP01"` con 300 (solo VIP, sin volumen);
+    `"vip01"` (minúsculas, no aplica); `"VI"`; `""`; `None`.
+  - `cotizar` con los mismos montos (no aplica VIP) y con código `""` (da
+    `"producto no existe"`, no `"codigo vacio"`).
+  - Orden de validación: casos con **dos** errores a la vez (p. ej. código `""` y
+    precio negativo → `"codigo vacio"`; producto inexistente y cantidad 0 →
+    `"producto no existe"`).
+  - `agregarProducto(0, ...)`: se acepta (protege contra cambiar a `not codigo`).
+  - `mas_vendidos()` con un **empate** de unidades (protege R13).
+  - `buscarProducto` con mayúsculas y minúsculas mezcladas.
+  - `cargar_datos` con JSON inválido **y** con bytes que no son UTF-8 (`b"\xff\xfe"`):
+    los dos dan `"archivo corrupto"`.
+- **Menú:** ejecútalo con `subprocess.run([sys.executable, "<raíz>/src/main.py"],
+  input=..., cwd=<carpeta temporal con una copia de datos_ejemplo.json>,
+  env={..., "PYTHONIOENCODING": "utf-8"}, capture_output=True, text=True,
+  encoding="utf-8")`. La entrada recorre 1 a 7, una opción inválida (`9`), un número
+  inválido (`abc`) y termina con `8`. Si la entrada se acaba antes del `8`,
+  `input()` lanza `EOFError`.
+- Commit: `scripts/salida_referencia.py` y `scripts/referencia_base.txt`.
+  `referencia_actual.txt` se borra después de comparar.
+
+**R1 — cabeceras de codificación**
+
+- Solo los 4 archivos de `src/`. `tests/conftest.py` también la tiene: **no se toca**.
+- Se permite `ruff check src --fix --select UP009`. Nunca `--fix` sin `--select`.
+
+**R2 — imports de `main`**
+
+- Orden final: `almacen`, `gestor`, `reportes`, en un solo bloque. Se permite
+  `--fix --select I001`.
+
+**R3 — código muerto**
+
+- Se borran: `calcular_descuento_viejo`, el bloque comentado `exportar_txt`,
+  `reporteViejoCSV` y `MODO_DEBUG`.
+- Se borra también `import os` de `reportes.py`: ya no se usa (`F401`) y la
+  auditoría no lo listó. Anótalo en la bitácora como código muerto.
+- No borres otros comentarios todavía (p. ej. el `TODO` de la burbuja se va en R13).
