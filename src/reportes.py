@@ -10,13 +10,9 @@ def hacer_cosa(v):
     return "$" + str(round(v, 2))
 
 
-def productos_stock_bajo():
+def productos_stock_bajo() -> list[dict]:
     """Regresa la lista de productos con stock por debajo del minimo."""
-    temp2 = []
-    for k in gestor.INVENTARIO:
-        if gestor.INVENTARIO[k]["stock"] < STOCK_MINIMO:
-            temp2.append(gestor.INVENTARIO[k])
-    return temp2
+    return [p for p in gestor.INVENTARIO.values() if p["stock"] < STOCK_MINIMO]
 
 
 def reporte_inventario():
@@ -36,12 +32,9 @@ def reporte_inventario():
     return s
 
 
-def total_vendido():
+def total_vendido() -> float:
     """Suma el total (con IVA) de todas las ventas registradas."""
-    t = 0
-    for v in gestor.VENTAS:
-        t = t + v["total"]
-    return round(t, 2)
+    return round(sum(v["total"] for v in gestor.VENTAS), 2)
 
 
 def mas_vendidos(n=3):
