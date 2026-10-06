@@ -20,16 +20,16 @@ TASA_EXTRA_VIP = 0.02
 # ---------------------------------------------------------------
 INVENTARIO = {}
 VENTAS = []
-contadorVentas = 0
+contador_ventas = 0
 ultimo_error = ""
 
 
 def reiniciar_sistema():
     """Borra todo el estado del sistema (inventario, ventas y folios)."""
-    global contadorVentas, ultimo_error
+    global contador_ventas, ultimo_error
     INVENTARIO.clear()
     VENTAS.clear()
-    contadorVentas = 0
+    contador_ventas = 0
     ultimo_error = ""
 
 
@@ -98,7 +98,7 @@ def registrar_venta(codigo, cantidad, cliente=""):
     texto y guarda el registro en la lista de ventas. Si algo falla
     regresa None y deja el motivo en ultimo_error.
     """
-    global contadorVentas, ultimo_error
+    global contador_ventas, ultimo_error
     temp2 = None
     if codigo is not None and codigo != "":
         if codigo in INVENTARIO:
@@ -140,9 +140,9 @@ def registrar_venta(codigo, cantidad, cliente=""):
     total = round(base + impuesto, 2)
     # descontar del inventario
     temp2["stock"] = temp2["stock"] - cantidad
-    contadorVentas = contadorVentas + 1
+    contador_ventas = contador_ventas + 1
     venta = {}
-    venta["folio"] = contadorVentas
+    venta["folio"] = contador_ventas
     venta["codigo"] = codigo
     venta["nombre"] = temp2["nombre"]
     venta["cantidad"] = cantidad
