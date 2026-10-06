@@ -28,7 +28,7 @@ def cargar_datos(ruta: str) -> bool:
     try:
         with open(ruta, encoding="utf-8") as archivo:
             d = json.load(archivo)
-    except Exception:
+    except ValueError:
         gestor.ultimo_error = "archivo corrupto"
         return False
     gestor.INVENTARIO.clear()
