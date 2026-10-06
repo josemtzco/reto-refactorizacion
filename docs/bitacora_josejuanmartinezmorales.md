@@ -45,4 +45,4 @@ Responde: ¿Qué tan útil fue Claude Code para detectar y corregir los problema
 ¿Qué propuso la IA que tú no habías notado? ¿En qué casos tuviste que corregir
 o rechazar sus sugerencias? ¿Qué aprendiste sobre refactorizar con apoyo de IA?
 
-*(Escribe aquí tu reflexión)*
+Claude fue bastante útil. Lo mejor fue que planteó el orden de refactorización: hacer primero cambios mecánicos sin lógica, después constantes, después lógica compleja. Eso reduce el ruido desde el paso 1 y cada cambio queda testeable. Detectó cosas que yo no había visto como que el descuento estaba duplicado y que los tickets no tenían tests, así que sugirió guardar una salida de referencia antes de tocar nada. En algunos puntos tuve que rechazar ideas, tipo hacer todos los type hints al final en un commit gigante, preferí agregarlos en cada refactor. 

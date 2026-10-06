@@ -1,6 +1,6 @@
 # Reflexión final
 
-*(Pendiente: la escribe el alumno, con su opinión personal.)*
+*El uso del ai tiene muchas posibilidades en este caso sea para corregir un proyecot ya existente pero usando- los prompts en orden y estructurados puedes mejorar muchisimo la calidad de los resultados, apesar de que nada es determinista de igual manera se puede notar un gran cambio en los resutlados positivamente, siempre tomando encuenta que la experiencia de la persona usandolo tiene un peso muy importante para verificar los resultados del AI. *
 
 ## Datos para la reflexión
 
