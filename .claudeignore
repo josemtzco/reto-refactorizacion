@@ -1,0 +1,40 @@
+# .claudeignore — contenido que no aporta contexto a Claude Code
+# Misma sintaxis que .gitignore: el "#" solo es comentario al inicio de línea,
+# así que cada explicación va en la línea de arriba de su patrón.
+
+# --- Entorno virtual ---
+# Miles de archivos de librerías de terceros (pytest, ruff); leerlos gasta
+# contexto y no dice nada del código del reto.
+.venv/
+venv/
+
+# --- Cachés de Python ---
+# Bytecode binario derivado de src/; el fuente .py ya contiene la información.
+__pycache__/
+*.py[cod]
+
+# --- Caché de pytest ---
+# Estado interno de la última corrida; el resultado real se obtiene
+# ejecutando pytest, no leyendo la caché.
+.pytest_cache/
+
+# --- Caché de ruff ---
+# Resultados de lint cacheados y posiblemente desactualizados;
+# hay que correr `ruff check src` para ver los errores vigentes.
+.ruff_cache/
+
+# --- Repositorio git ---
+# Objetos comprimidos e internos de git; el historial se consulta con
+# `git log` / `git diff`, no leyendo .git/ directamente.
+.git/
+
+# --- Archivos generados ---
+# Reportes de cobertura: salida de herramientas, no fuente.
+.coverage
+htmlcov/
+# Exportaciones CSV generadas al ejecutar los reportes.
+*.csv
+# Logs de ejecución local.
+*.log
+# OJO: datos_ejemplo.json NO se excluye: es pequeño y Claude necesita ver su
+# estructura (claves inventario/ventas/contador) para no romper el formato JSON.

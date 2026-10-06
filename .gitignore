@@ -1,0 +1,41 @@
+# .gitignore — reto de refactorización "La Esquina"
+# Nota: en sintaxis gitignore un "#" solo es comentario al inicio de la línea;
+# un comentario al final de un patrón se volvería parte del patrón. Por eso
+# cada explicación va en la línea de arriba de su patrón.
+
+# --- Entorno virtual ---
+# Se recrea con `python -m venv .venv` + requirements.txt; pesa mucho y depende
+# de la máquina (rutas absolutas, binarios de Windows).
+.venv/
+venv/
+
+# --- Cachés de Python ---
+# Bytecode compilado que el intérprete regenera solo; no es código fuente.
+__pycache__/
+*.py[cod]
+
+# --- Caché de pytest ---
+# Guarda qué tests fallaron en la última corrida; es estado local.
+.pytest_cache/
+
+# --- Caché de ruff ---
+# Resultados de lint cacheados; se regeneran en cada `ruff check`.
+.ruff_cache/
+
+# --- Archivos generados ---
+# Reportes de cobertura si alguien corre pytest-cov; son salida, no fuente.
+.coverage
+htmlcov/
+# Exportaciones CSV que produce el código de reportes al ejecutarse.
+*.csv
+# Logs de ejecución local.
+*.log
+# OJO: datos_ejemplo.json NO se ignora: es el dato de entrada del menú
+# (src/main.py) y forma parte del repo, aunque la opción "guardar" lo reescriba.
+
+# --- Configuración local de Claude Code ---
+# Permisos personales de esta máquina; la configuración compartida
+# (.claude/settings.json, CLAUDE.md) sí se versiona.
+.claude/settings.local.json
+
+# (.git/ no se lista: git nunca rastrea su propio directorio.)
