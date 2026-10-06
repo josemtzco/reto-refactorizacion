@@ -260,3 +260,30 @@ que tocas.
 - `except ValueError`, no `json.JSONDecodeError`: `ValueError` también atrapa el
   `UnicodeDecodeError` de un archivo con bytes inválidos. El caso `b"\xff\xfe"` del
   script de referencia lo comprueba.
+
+---
+
+### Iteración 4 — R10, R11, R12
+
+**Lecciones de la iteración anterior:** ninguna registrada en la iteración 3 (R7-R9 sin incidencias).
+
+**R10 — `hay_archivo`**
+
+- `def hay_archivo(ruta: str) -> bool:` con `return os.path.exists(ruta)` y una
+  docstring. Actualizar la llamada en `main.py` **en el mismo commit**.
+- Comprueba con `Grep` que no quede ningún `hayArchivo` en `src/`.
+- Esta fase toca `main.py`: además del script, el alumno prueba el menú a mano en el
+  checkpoint.
+
+**R11 — comprensiones en `reportes.py`**
+
+- `productos_stock_bajo`: `[p for p in gestor.INVENTARIO.values() if p["stock"] <
+  STOCK_MINIMO]` (mismo orden que el diccionario).
+- `total_vendido`: `round(sum(v["total"] for v in gestor.VENTAS), 2)`. `sum` suma en
+  el mismo orden que el bucle, así que el resultado es idéntico.
+
+**R12 — `formatear_dinero`**
+
+- `def formatear_dinero(monto: float) -> str:` y renombrar sus 4 usos.
+- Se permite `f"${round(monto, 2)}"` (da el mismo texto que `"$" + str(...)`).
+  Prohibido `:.2f`: cambiaría `$23.2` por `$23.20`.
