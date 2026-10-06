@@ -12,7 +12,7 @@ Después de cada cambio ejecuta `pytest` y anota el resultado.
 
 | #  | Prompt usado | Cambio realizado | Justificación | Tests OK |
 |----|--------------|------------------|---------------|----------|
-| 1  |              |                  |               |          |
+| 1  | Aplica la fase R1 de la auditoría: quitar las cabeceras `# -*- coding: utf-8 -*-` de los 4 archivos de `src/` | Se borró la primera línea de `gestor.py`, `almacen.py`, `reportes.py` y `main.py` (`ruff --fix --select UP009`). | Quita una línea que sobra en Python 3 (#18). Categoría: eliminar código muerto o comentarios obsoletos. | ✅ 20 passed · ruff: 16 errores (antes 20) · referencia idéntica |
 | 2  |              |                  |               |          |
 | 3  |              |                  |               |          |
 | 4  |              |                  |               |          |
