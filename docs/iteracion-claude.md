@@ -236,7 +236,9 @@ otros comandos fue bloqueado por el sandbox; ejecuta cada paso por separado.
 
 ### Iteración 7 — R19, R20, R21
 
-**Lecciones de la iteración anterior:** *(las completa el agente)*
+**Lecciones de la iteración anterior:** ninguna de código en la iteración 6 (R16-R18
+sin incidencias). Notas de proceso: el `Read` avisó de un cambio en disco por una
+edición propia, sin efecto; el aviso `LF → CRLF` de git es solo `autocrlf`.
 
 **R19 — `_aplica_vip(cliente, base)`**
 

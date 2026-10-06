@@ -356,3 +356,41 @@ encadenes comandos como `Remove-Item` con otros).
   del script de referencia lo detecta).
 - Hint: `-> float` (un `int` es válido donde se espera `float`).
 - El VIP no se toca aquí (es R19).
+
+---
+
+### Iteración 7 — R19, R20, R21
+
+**Lecciones de la iteración anterior:** ninguna de código en la iteración 6 (R16-R18
+sin incidencias). Notas de proceso: el `Read` avisó de un cambio en disco por una
+edición propia, sin efecto; el aviso `LF → CRLF` de git es solo `autocrlf`.
+
+**R19 — `_aplica_vip(cliente, base)`**
+
+- `return bool(cliente) and cliente.startswith(PREFIJO_VIP) and base >
+  MONTO_MINIMO_VIP`. `bool(cliente)` cubre `None` y `""`; `startswith` cubre el
+  `len >= 3`.
+- La `base` que recibe es `subtotal - descuento` **antes** de sumar el extra VIP. El
+  extra se sigue calculando sobre el subtotal: `descuento + subtotal *
+  TASA_EXTRA_VIP`.
+- `cotizar` **no** llama a `_aplica_vip`.
+
+**R20 — cláusulas de guarda en `registrar_venta`**
+
+- Orden exacto: `codigo in (None, "")` → `"codigo vacio"`; `codigo not in INVENTARIO`
+  → `"producto no existe"`; `cantidad is None or cantidad <= 0` →
+  `"cantidad invalida"`; `INVENTARIO[codigo]["stock"] < cantidad` →
+  `"stock insuficiente"`.
+- Se permite renombrar `temp2` → `producto` en esta fase, porque desaparece el
+  `temp2 = None` inicial.
+- Solo se reordena la validación; los cálculos no se mueven (son R21).
+
+**R21 — extraer el cálculo de montos**
+
+- Una función, p. ej. `_calcular_montos(subtotal, cliente) -> tuple[float, float,
+  float]`, que regrese `(descuento, impuesto, total)`.
+- **Los redondeos quedan donde estaban:** `total` sale redondeado; `descuento` e
+  `impuesto` salen **sin** redondear y se redondean al guardarlos en la venta. El
+  ticket necesita el descuento sin redondear para la condición `> 0`.
+- `aux` → `subtotal`, `desc` → `descuento`. No construyas el dict de la venta aquí.
+
