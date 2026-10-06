@@ -1,4 +1,4 @@
-﻿# CLAUDE.md — Reto de refactorización "La Esquina"
+# CLAUDE.md — Reto de refactorización "La Esquina"
 
 ## 1. Descripción del proyecto
 
@@ -234,3 +234,29 @@ que tocas.
 - No reescribas fórmulas: `base + base * TASA_IVA` **no** pasa a
   `base * (1 + TASA_IVA)`, porque con flotantes el resultado puede cambiar en el
   último decimal. Mismo orden de operaciones, solo cambia el nombre del número.
+
+---
+
+### Iteración 3 — R7, R8, R9
+
+**Lecciones de la iteración anterior:** ninguna registrada en la iteración 2 (R4-R6 sin incidencias).
+
+**R7 — `STOCK_MINIMO` en `reportes.py`**
+
+- Una sola constante `STOCK_MINIMO = 5` arriba de `reportes.py`, usada en
+  `productos_stock_bajo` **y** en `reporte_inventario`. Nada más cambia.
+
+**R8 — `with open` en `almacen.py`**
+
+- `guardar_datos`: `with open(ruta, "w", encoding="utf-8") as archivo:` y dentro el
+  `json.dump` con los mismos argumentos (`indent=2, ensure_ascii=False`).
+- `cargar_datos`: dentro del `with` va solo el `json.load` (con su `try`). La carga
+  del estado (`clear` + asignación/`append`) va **después** del `with`, y sigue
+  modificando en sitio: nunca `gestor.INVENTARIO = ...`.
+- Se quita el modo `"r"` (`UP015`). Todavía **no** cambies `except Exception` (es R9).
+
+**R9 — `except ValueError`**
+
+- `except ValueError`, no `json.JSONDecodeError`: `ValueError` también atrapa el
+  `UnicodeDecodeError` de un archivo con bytes inválidos. El caso `b"\xff\xfe"` del
+  script de referencia lo comprueba.
