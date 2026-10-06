@@ -58,17 +58,17 @@ def eliminar_producto(codigo):
     return False
 
 
-def actualizar_stock(codigo, cantidad):
+def actualizar_stock(codigo: str, cantidad: int) -> bool:
     """Suma unidades al stock (o resta si la cantidad es negativa)."""
     global ultimo_error
     if codigo not in INVENTARIO:
         ultimo_error = "producto no existe"
         return False
-    aux = INVENTARIO[codigo]["stock"] + cantidad
-    if aux < 0:
+    nuevo_stock = INVENTARIO[codigo]["stock"] + cantidad
+    if nuevo_stock < 0:
         ultimo_error = "el stock no puede quedar negativo"
         return False
-    INVENTARIO[codigo]["stock"] = aux
+    INVENTARIO[codigo]["stock"] = nuevo_stock
     return True
 
 
