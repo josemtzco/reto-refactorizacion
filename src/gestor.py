@@ -104,7 +104,9 @@ def _aplica_vip(cliente: str | None, base: float) -> bool:
     return bool(cliente) and cliente.startswith(PREFIJO_VIP) and base > MONTO_MINIMO_VIP
 
 
-def registrar_venta(codigo, cantidad, cliente=""):
+def registrar_venta(
+    codigo: str | None, cantidad: int | None, cliente: str | None = ""
+) -> dict | None:
     """Registra una venta completa.
 
     Esta funcion hace de todo: valida los datos, calcula descuentos e
@@ -113,26 +115,21 @@ def registrar_venta(codigo, cantidad, cliente=""):
     regresa None y deja el motivo en ultimo_error.
     """
     global contador_ventas, ultimo_error
-    temp2 = None
-    if codigo is not None and codigo != "":
-        if codigo in INVENTARIO:
-            if cantidad is not None and cantidad > 0:
-                if INVENTARIO[codigo]["stock"] >= cantidad:
-                    temp2 = INVENTARIO[codigo]
-                else:
-                    ultimo_error = "stock insuficiente"
-                    return None
-            else:
-                ultimo_error = "cantidad invalida"
-                return None
-        else:
-            ultimo_error = "producto no existe"
-            return None
-    else:
+    if codigo in (None, ""):
         ultimo_error = "codigo vacio"
         return None
+    if codigo not in INVENTARIO:
+        ultimo_error = "producto no existe"
+        return None
+    if cantidad is None or cantidad <= 0:
+        ultimo_error = "cantidad invalida"
+        return None
+    producto = INVENTARIO[codigo]
+    if producto["stock"] < cantidad:
+        ultimo_error = "stock insuficiente"
+        return None
     # calculo del subtotal
-    aux = temp2["precio"] * cantidad
+    aux = producto["precio"] * cantidad
     # descuentos por volumen de compra
     desc = _descuento_por_volumen(aux)
     # los clientes cuyo codigo empieza con VIP tienen un extra,
@@ -143,12 +140,12 @@ def registrar_venta(codigo, cantidad, cliente=""):
     impuesto = base * TASA_IVA
     total = round(base + impuesto, 2)
     # descontar del inventario
-    temp2["stock"] = temp2["stock"] - cantidad
+    producto["stock"] = producto["stock"] - cantidad
     contador_ventas = contador_ventas + 1
     venta = {}
     venta["folio"] = contador_ventas
     venta["codigo"] = codigo
-    venta["nombre"] = temp2["nombre"]
+    venta["nombre"] = producto["nombre"]
     venta["cantidad"] = cantidad
     venta["subtotal"] = round(aux, 2)
     venta["descuento"] = round(desc, 2)
