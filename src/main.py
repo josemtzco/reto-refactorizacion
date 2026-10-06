@@ -1,7 +1,7 @@
 """Punto de entrada del gestor de tienda (menu interactivo en consola)."""
 
-import gestor
 import almacen
+import gestor
 import reportes
 
 ARCHIVO = "datos_ejemplo.json"

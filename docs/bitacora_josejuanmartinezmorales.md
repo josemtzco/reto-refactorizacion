@@ -13,7 +13,7 @@ Después de cada cambio ejecuta `pytest` y anota el resultado.
 | #  | Prompt usado | Cambio realizado | Justificación | Tests OK |
 |----|--------------|------------------|---------------|----------|
 | 1  | Aplica la fase R1 de la auditoría: quitar las cabeceras `# -*- coding: utf-8 -*-` de los 4 archivos de `src/` | Se borró la primera línea de `gestor.py`, `almacen.py`, `reportes.py` y `main.py` (`ruff --fix --select UP009`). | Quita una línea que sobra en Python 3 (#18). Categoría: eliminar código muerto o comentarios obsoletos. | ✅ 20 passed · ruff: 16 errores (antes 20) · referencia idéntica |
-| 2  |              |                  |               |          |
+| 2  | Aplica la fase R2 de la auditoría: ordenar los imports de `main.py` (almacen, gestor, reportes) | `main.py`: `import almacen` ahora va antes de `import gestor` (`ruff --fix --select I001`). | Imports en orden alfabético, como pide PEP 8 (#19). Categoría: renombrar/ordenar para legibilidad (cambio mecánico, sin lógica). | ✅ 20 passed · ruff: 15 errores (antes 16) · referencia idéntica |
 | 3  |              |                  |               |          |
 | 4  |              |                  |               |          |
 | 5  |              |                  |               |          |
