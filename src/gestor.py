@@ -122,6 +122,23 @@ def _calcular_montos(
     return descuento, impuesto, total
 
 
+def _construir_ticket(venta: dict, descuento: float) -> str:
+    """Arma el ticket en texto plano.
+
+    La linea de descuento aparece solo si el descuento (sin redondear) es mayor a 0.
+    """
+    ticket = "TIENDA LA ESQUINA\n"
+    ticket += "----------------------------\n"
+    ticket += f"Folio: {venta['folio']}\n"
+    ticket += f"{venta['nombre']} x{venta['cantidad']}\n"
+    ticket += f"Subtotal: ${venta['subtotal']}\n"
+    if descuento > 0:
+        ticket += f"Descuento: -${venta['descuento']}\n"
+    ticket += f"IVA: ${venta['impuesto']}\n"
+    ticket += f"TOTAL: ${venta['total']}\n"
+    return ticket
+
+
 def registrar_venta(
     codigo: str | None, cantidad: int | None, cliente: str | None = ""
 ) -> dict | None:
@@ -139,10 +156,10 @@ def registrar_venta(
     if codigo not in INVENTARIO:
         ultimo_error = "producto no existe"
         return None
-    if cantidad is None or cantidad <= 0:
+    if cantidad is None or not cantidad > 0:
         ultimo_error = "cantidad invalida"
         return None
-    producto = INVENTARIO[codigo]
+    producto =INVENTARIO[codigo]
     if producto["stock"] < cantidad:
         ultimo_error = "stock insuficiente"
         return None
@@ -162,18 +179,7 @@ def registrar_venta(
     venta["total"] = total
     venta["cliente"] = cliente
     venta["fecha"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    # armar el ticket en texto plano
-    t = ""
-    t = t + "TIENDA LA ESQUINA\n"
-    t = t + "----------------------------\n"
-    t = t + "Folio: " + str(venta["folio"]) + "\n"
-    t = t + venta["nombre"] + " x" + str(cantidad) + "\n"
-    t = t + "Subtotal: $" + str(venta["subtotal"]) + "\n"
-    if descuento > 0:
-        t = t + "Descuento: -$" + str(venta["descuento"]) + "\n"
-    t = t + "IVA: $" + str(venta["impuesto"]) + "\n"
-    t = t + "TOTAL: $" + str(venta["total"]) + "\n"
-    venta["ticket"] = t
+    venta["ticket"] = _construir_ticket(venta, descuento)
     VENTAS.append(venta)
     return venta
 
@@ -184,10 +190,10 @@ def cotizar(codigo, cantidad):
     if codigo not in INVENTARIO:
         ultimo_error = "producto no existe"
         return None
-    if cantidad is None or cantidad <= 0:
+    if cantidad is None or not cantidad > 0:
         ultimo_error = "cantidad invalida"
         return None
-    aux = INVENTARIO[codigo]["precio"] * cantidad
+    aux =INVENTARIO[codigo]["precio"] * cantidad
     desc = _descuento_por_volumen(aux)
     base = aux - desc
     total = base + base * TASA_IVA
