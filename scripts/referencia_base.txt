@@ -1,0 +1,621 @@
+== VENTAS ==
+venta('P1', 1, '') -> {'folio': 1, 'codigo': 'P1', 'nombre': 'Cafe Molido', 'cantidad': 1, 'subtotal': 100.0, 'descuento': 0, 'impuesto': 16.0, 'total': 116.0, 'cliente': '', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nCafe Molido x1\nSubtotal: $100.0\nIVA: $16.0\nTOTAL: $116.0\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Cafe Molido x1
+Subtotal: $100.0
+IVA: $16.0
+TOTAL: $116.0
+
+ultimo_error=''
+stock=99
+venta('P1', 4, '') -> {'folio': 1, 'codigo': 'P1', 'nombre': 'Cafe Molido', 'cantidad': 4, 'subtotal': 400.0, 'descuento': 0, 'impuesto': 64.0, 'total': 464.0, 'cliente': '', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nCafe Molido x4\nSubtotal: $400.0\nIVA: $64.0\nTOTAL: $464.0\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Cafe Molido x4
+Subtotal: $400.0
+IVA: $64.0
+TOTAL: $464.0
+
+ultimo_error=''
+stock=96
+venta('P1', 5, '') -> {'folio': 1, 'codigo': 'P1', 'nombre': 'Cafe Molido', 'cantidad': 5, 'subtotal': 500.0, 'descuento': 25.0, 'impuesto': 76.0, 'total': 551.0, 'cliente': '', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nCafe Molido x5\nSubtotal: $500.0\nDescuento: -$25.0\nIVA: $76.0\nTOTAL: $551.0\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Cafe Molido x5
+Subtotal: $500.0
+Descuento: -$25.0
+IVA: $76.0
+TOTAL: $551.0
+
+ultimo_error=''
+stock=95
+venta('P1', 10, '') -> {'folio': 1, 'codigo': 'P1', 'nombre': 'Cafe Molido', 'cantidad': 10, 'subtotal': 1000.0, 'descuento': 100.0, 'impuesto': 144.0, 'total': 1044.0, 'cliente': '', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nCafe Molido x10\nSubtotal: $1000.0\nDescuento: -$100.0\nIVA: $144.0\nTOTAL: $1044.0\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Cafe Molido x10
+Subtotal: $1000.0
+Descuento: -$100.0
+IVA: $144.0
+TOTAL: $1044.0
+
+ultimo_error=''
+stock=90
+venta('P1', 6, 'VIP01') -> {'folio': 1, 'codigo': 'P1', 'nombre': 'Cafe Molido', 'cantidad': 6, 'subtotal': 600.0, 'descuento': 42.0, 'impuesto': 89.28, 'total': 647.28, 'cliente': 'VIP01', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nCafe Molido x6\nSubtotal: $600.0\nDescuento: -$42.0\nIVA: $89.28\nTOTAL: $647.28\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Cafe Molido x6
+Subtotal: $600.0
+Descuento: -$42.0
+IVA: $89.28
+TOTAL: $647.28
+
+ultimo_error=''
+stock=94
+venta('P1', 2, 'VIP01') -> {'folio': 1, 'codigo': 'P1', 'nombre': 'Cafe Molido', 'cantidad': 2, 'subtotal': 200.0, 'descuento': 0, 'impuesto': 32.0, 'total': 232.0, 'cliente': 'VIP01', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nCafe Molido x2\nSubtotal: $200.0\nIVA: $32.0\nTOTAL: $232.0\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Cafe Molido x2
+Subtotal: $200.0
+IVA: $32.0
+TOTAL: $232.0
+
+ultimo_error=''
+stock=98
+venta('P4', 1, 'VIP01') -> {'folio': 1, 'codigo': 'P4', 'nombre': 'Galletas', 'cantidad': 1, 'subtotal': 250.0, 'descuento': 5.0, 'impuesto': 39.2, 'total': 284.2, 'cliente': 'VIP01', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nGalletas x1\nSubtotal: $250.0\nDescuento: -$5.0\nIVA: $39.2\nTOTAL: $284.2\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Galletas x1
+Subtotal: $250.0
+Descuento: -$5.0
+IVA: $39.2
+TOTAL: $284.2
+
+ultimo_error=''
+stock=49
+venta('P4', 3, 'VIP01') -> {'folio': 1, 'codigo': 'P4', 'nombre': 'Galletas', 'cantidad': 3, 'subtotal': 750.0, 'descuento': 52.5, 'impuesto': 111.6, 'total': 809.1, 'cliente': 'VIP01', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nGalletas x3\nSubtotal: $750.0\nDescuento: -$52.5\nIVA: $111.6\nTOTAL: $809.1\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Galletas x3
+Subtotal: $750.0
+Descuento: -$52.5
+IVA: $111.6
+TOTAL: $809.1
+
+ultimo_error=''
+stock=47
+venta('P1', 3, 'VIP01') -> {'folio': 1, 'codigo': 'P1', 'nombre': 'Cafe Molido', 'cantidad': 3, 'subtotal': 300.0, 'descuento': 6.0, 'impuesto': 47.04, 'total': 341.04, 'cliente': 'VIP01', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nCafe Molido x3\nSubtotal: $300.0\nDescuento: -$6.0\nIVA: $47.04\nTOTAL: $341.04\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Cafe Molido x3
+Subtotal: $300.0
+Descuento: -$6.0
+IVA: $47.04
+TOTAL: $341.04
+
+ultimo_error=''
+stock=97
+venta('P1', 6, 'vip01') -> {'folio': 1, 'codigo': 'P1', 'nombre': 'Cafe Molido', 'cantidad': 6, 'subtotal': 600.0, 'descuento': 30.0, 'impuesto': 91.2, 'total': 661.2, 'cliente': 'vip01', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nCafe Molido x6\nSubtotal: $600.0\nDescuento: -$30.0\nIVA: $91.2\nTOTAL: $661.2\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Cafe Molido x6
+Subtotal: $600.0
+Descuento: -$30.0
+IVA: $91.2
+TOTAL: $661.2
+
+ultimo_error=''
+stock=94
+venta('P1', 6, 'VI') -> {'folio': 1, 'codigo': 'P1', 'nombre': 'Cafe Molido', 'cantidad': 6, 'subtotal': 600.0, 'descuento': 30.0, 'impuesto': 91.2, 'total': 661.2, 'cliente': 'VI', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nCafe Molido x6\nSubtotal: $600.0\nDescuento: -$30.0\nIVA: $91.2\nTOTAL: $661.2\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Cafe Molido x6
+Subtotal: $600.0
+Descuento: -$30.0
+IVA: $91.2
+TOTAL: $661.2
+
+ultimo_error=''
+stock=94
+venta('P1', 6, '') -> {'folio': 1, 'codigo': 'P1', 'nombre': 'Cafe Molido', 'cantidad': 6, 'subtotal': 600.0, 'descuento': 30.0, 'impuesto': 91.2, 'total': 661.2, 'cliente': '', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nCafe Molido x6\nSubtotal: $600.0\nDescuento: -$30.0\nIVA: $91.2\nTOTAL: $661.2\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Cafe Molido x6
+Subtotal: $600.0
+Descuento: -$30.0
+IVA: $91.2
+TOTAL: $661.2
+
+ultimo_error=''
+stock=94
+venta('P1', 6, None) -> {'folio': 1, 'codigo': 'P1', 'nombre': 'Cafe Molido', 'cantidad': 6, 'subtotal': 600.0, 'descuento': 30.0, 'impuesto': 91.2, 'total': 661.2, 'cliente': None, 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nCafe Molido x6\nSubtotal: $600.0\nDescuento: -$30.0\nIVA: $91.2\nTOTAL: $661.2\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Cafe Molido x6
+Subtotal: $600.0
+Descuento: -$30.0
+IVA: $91.2
+TOTAL: $661.2
+
+ultimo_error=''
+stock=94
+venta('P2', 7, 'VIP99') -> {'folio': 1, 'codigo': 'P2', 'nombre': 'Azucar', 'cantidad': 7, 'subtotal': 227.5, 'descuento': 4.55, 'impuesto': 35.67, 'total': 258.62, 'cliente': 'VIP99', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nAzucar x7\nSubtotal: $227.5\nDescuento: -$4.55\nIVA: $35.67\nTOTAL: $258.62\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Azucar x7
+Subtotal: $227.5
+Descuento: -$4.55
+IVA: $35.67
+TOTAL: $258.62
+
+ultimo_error=''
+stock=33
+venta('P2', 3, 'Ana') -> {'folio': 1, 'codigo': 'P2', 'nombre': 'Azucar', 'cantidad': 3, 'subtotal': 97.5, 'descuento': 0, 'impuesto': 15.6, 'total': 113.1, 'cliente': 'Ana', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nAzucar x3\nSubtotal: $97.5\nIVA: $15.6\nTOTAL: $113.1\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Azucar x3
+Subtotal: $97.5
+IVA: $15.6
+TOTAL: $113.1
+
+ultimo_error=''
+stock=37
+exacto('E1', '') -> {'folio': 1, 'codigo': 'E1', 'nombre': 'Exacto 200', 'cantidad': 1, 'subtotal': 200.0, 'descuento': 0, 'impuesto': 32.0, 'total': 232.0, 'cliente': '', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nExacto 200 x1\nSubtotal: $200.0\nIVA: $32.0\nTOTAL: $232.0\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Exacto 200 x1
+Subtotal: $200.0
+IVA: $32.0
+TOTAL: $232.0
+
+exacto('E1', 'VIP01') -> {'folio': 1, 'codigo': 'E1', 'nombre': 'Exacto 200', 'cantidad': 1, 'subtotal': 200.0, 'descuento': 0, 'impuesto': 32.0, 'total': 232.0, 'cliente': 'VIP01', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nExacto 200 x1\nSubtotal: $200.0\nIVA: $32.0\nTOTAL: $232.0\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Exacto 200 x1
+Subtotal: $200.0
+IVA: $32.0
+TOTAL: $232.0
+
+exacto('E2', '') -> {'folio': 1, 'codigo': 'E2', 'nombre': 'Exacto 500', 'cantidad': 1, 'subtotal': 500.0, 'descuento': 25.0, 'impuesto': 76.0, 'total': 551.0, 'cliente': '', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nExacto 500 x1\nSubtotal: $500.0\nDescuento: -$25.0\nIVA: $76.0\nTOTAL: $551.0\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Exacto 500 x1
+Subtotal: $500.0
+Descuento: -$25.0
+IVA: $76.0
+TOTAL: $551.0
+
+exacto('E2', 'VIP01') -> {'folio': 1, 'codigo': 'E2', 'nombre': 'Exacto 500', 'cantidad': 1, 'subtotal': 500.0, 'descuento': 35.0, 'impuesto': 74.4, 'total': 539.4, 'cliente': 'VIP01', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nExacto 500 x1\nSubtotal: $500.0\nDescuento: -$35.0\nIVA: $74.4\nTOTAL: $539.4\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Exacto 500 x1
+Subtotal: $500.0
+Descuento: -$35.0
+IVA: $74.4
+TOTAL: $539.4
+
+exacto('E3', '') -> {'folio': 1, 'codigo': 'E3', 'nombre': 'Exacto 1000', 'cantidad': 1, 'subtotal': 1000.0, 'descuento': 100.0, 'impuesto': 144.0, 'total': 1044.0, 'cliente': '', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nExacto 1000 x1\nSubtotal: $1000.0\nDescuento: -$100.0\nIVA: $144.0\nTOTAL: $1044.0\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Exacto 1000 x1
+Subtotal: $1000.0
+Descuento: -$100.0
+IVA: $144.0
+TOTAL: $1044.0
+
+exacto('E3', 'VIP01') -> {'folio': 1, 'codigo': 'E3', 'nombre': 'Exacto 1000', 'cantidad': 1, 'subtotal': 1000.0, 'descuento': 120.0, 'impuesto': 140.8, 'total': 1020.8, 'cliente': 'VIP01', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nExacto 1000 x1\nSubtotal: $1000.0\nDescuento: -$120.0\nIVA: $140.8\nTOTAL: $1020.8\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Exacto 1000 x1
+Subtotal: $1000.0
+Descuento: -$120.0
+IVA: $140.8
+TOTAL: $1020.8
+
+exacto('E4', '') -> {'folio': 1, 'codigo': 'E4', 'nombre': 'Menor 500', 'cantidad': 1, 'subtotal': 499.99, 'descuento': 0, 'impuesto': 80.0, 'total': 579.99, 'cliente': '', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nMenor 500 x1\nSubtotal: $499.99\nIVA: $80.0\nTOTAL: $579.99\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Menor 500 x1
+Subtotal: $499.99
+IVA: $80.0
+TOTAL: $579.99
+
+exacto('E4', 'VIP01') -> {'folio': 1, 'codigo': 'E4', 'nombre': 'Menor 500', 'cantidad': 1, 'subtotal': 499.99, 'descuento': 10.0, 'impuesto': 78.4, 'total': 568.39, 'cliente': 'VIP01', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nMenor 500 x1\nSubtotal: $499.99\nDescuento: -$10.0\nIVA: $78.4\nTOTAL: $568.39\n'}
+ticket:
+TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Menor 500 x1
+Subtotal: $499.99
+Descuento: -$10.0
+IVA: $78.4
+TOTAL: $568.39
+
+== ERRORES DE VENTA Y COTIZACION ==
+registrar_venta('', 1) -> None error='codigo vacio'
+cotizar('', 1) -> None error='producto no existe'
+registrar_venta(None, 1) -> None error='codigo vacio'
+cotizar(None, 1) -> None error='producto no existe'
+registrar_venta('', 0) -> None error='codigo vacio'
+cotizar('', 0) -> None error='producto no existe'
+registrar_venta('NOEXISTE', 1) -> None error='producto no existe'
+cotizar('NOEXISTE', 1) -> None error='producto no existe'
+registrar_venta('NOEXISTE', 0) -> None error='producto no existe'
+cotizar('NOEXISTE', 0) -> None error='producto no existe'
+registrar_venta('P1', 0) -> None error='cantidad invalida'
+cotizar('P1', 0) -> None error='cantidad invalida'
+registrar_venta('P1', -2) -> None error='cantidad invalida'
+cotizar('P1', -2) -> None error='cantidad invalida'
+registrar_venta('P1', None) -> None error='cantidad invalida'
+cotizar('P1', None) -> None error='cantidad invalida'
+registrar_venta('P3', 99) -> None error='stock insuficiente'
+cotizar('P3', 99) -> 344.52 error=''
+== COTIZAR ==
+cotizar('P1', 1) -> 116.0
+cotizar('P1', 4) -> 464.0
+cotizar('P1', 5) -> 551.0
+cotizar('P1', 10) -> 1044.0
+cotizar('P4', 2) -> 551.0
+cotizar('E1', 1) -> 232.0
+cotizar('E2', 1) -> 551.0
+cotizar('E3', 1) -> 1044.0
+cotizar('E4', 1) -> 579.99
+cotizar('', 1) -> None 'producto no existe'
+== PRODUCTOS ==
+agregarProducto('', 'Sin codigo', 10.0, 1) -> False 'codigo vacio'
+agregarProducto(None, 'Sin codigo', 10.0, 1) -> False 'codigo vacio'
+agregarProducto('', 'Sin codigo y precio malo', -1.0, 1) -> False 'codigo vacio'
+agregarProducto('A1', 'Cafe', 10.0, 5) -> True ''
+agregarProducto('A1', 'Repetido', 10.0, 5) -> False 'el producto ya existe'
+agregarProducto('A1', 'Repetido y precio malo', -1, -1) -> False 'el producto ya existe'
+agregarProducto('A2', 'Precio cero', 0, 5) -> False 'precio invalido'
+agregarProducto('A3', 'Precio negativo', -3.0, 5) -> False 'precio invalido'
+agregarProducto('A4', 'Stock negativo', 3.0, -1) -> False 'stock invalido'
+agregarProducto('A5', 'Precio y stock malos', -3.0, -1) -> False 'precio invalido'
+agregarProducto('A6', 'Stock cero', 3.0, 0) -> True ''
+agregarProducto(0, 'Codigo cero', 3.0, 1) -> True ''
+INVENTARIO={'A1': {'codigo': 'A1', 'nombre': 'Cafe', 'precio': 10.0, 'stock': 5}, 'A6': {'codigo': 'A6', 'nombre': 'Stock cero', 'precio': 3.0, 'stock': 0}, 0: {'codigo': 0, 'nombre': 'Codigo cero', 'precio': 3.0, 'stock': 1}}
+actualizar_stock('A1', 5) -> True '' stock={'codigo': 'A1', 'nombre': 'Cafe', 'precio': 10.0, 'stock': 10}
+actualizar_stock('A1', -5) -> True '' stock={'codigo': 'A1', 'nombre': 'Cafe', 'precio': 10.0, 'stock': 5}
+actualizar_stock('A1', -50) -> False 'el stock no puede quedar negativo' stock={'codigo': 'A1', 'nombre': 'Cafe', 'precio': 10.0, 'stock': 5}
+actualizar_stock('ZZ', 1) -> False 'producto no existe' stock={'codigo': 'A1', 'nombre': 'Cafe', 'precio': 10.0, 'stock': 5}
+eliminar_producto('A6') -> True ''
+eliminar_producto('A6') -> False 'producto no existe'
+eliminar_producto('') -> False 'producto no existe'
+buscarProducto('cafe') -> [{'codigo': 'P1', 'nombre': 'Cafe Molido', 'precio': 100.0, 'stock': 100}]
+buscarProducto('CAFE') -> [{'codigo': 'P1', 'nombre': 'Cafe Molido', 'precio': 100.0, 'stock': 100}]
+buscarProducto('cAfE') -> [{'codigo': 'P1', 'nombre': 'Cafe Molido', 'precio': 100.0, 'stock': 100}]
+buscarProducto('a') -> [{'codigo': 'P1', 'nombre': 'Cafe Molido', 'precio': 100.0, 'stock': 100}, {'codigo': 'P2', 'nombre': 'Azucar', 'precio': 32.5, 'stock': 40}, {'codigo': 'P4', 'nombre': 'Galletas', 'precio': 250.0, 'stock': 50}]
+buscarProducto('') -> [{'codigo': 'P1', 'nombre': 'Cafe Molido', 'precio': 100.0, 'stock': 100}, {'codigo': 'P2', 'nombre': 'Azucar', 'precio': 32.5, 'stock': 40}, {'codigo': 'P3', 'nombre': 'Leche', 'precio': 3.0, 'stock': 3}, {'codigo': 'P4', 'nombre': 'Galletas', 'precio': 250.0, 'stock': 50}]
+buscarProducto('xyz') -> []
+buscarProducto('LECHE') -> [{'codigo': 'P3', 'nombre': 'Leche', 'precio': 3.0, 'stock': 3}]
+== REPORTES ==
+inventario vacio: '===== INVENTARIO =====\nValor total del inventario: $0\n'
+resumen vacio: '===== RESUMEN DE VENTAS =====\nNumero de ventas: 0\nTotal del dia: $0\n'
+mas_vendidos vacio: []
+total vacio: 0
+reporte_inventario: '===== INVENTARIO =====\nP1 | Cafe Molido | $100.0 | stock: 94\nP2 | Azucar | $32.5 | stock: 34\nP3 | Leche | $3.0 | stock: 2  <-- STOCK BAJO\nP4 | Galletas | $250.0 | stock: 44\nValor total del inventario: $21511.0\n'
+resumen_ventas: '===== RESUMEN DE VENTAS =====\nFolio 1: Cafe Molido x5 = $551.0\nFolio 2: Azucar x5 = $188.5\nFolio 3: Galletas x2 = $551.0\nFolio 4: Cafe Molido x1 = $116.0\nFolio 5: Azucar x1 = $37.7\nFolio 6: Galletas x4 = $1044.0\nFolio 7: Leche x1 = $3.48\nNumero de ventas: 7\nTotal del dia: $2491.68\n'
+mas_vendidos(): [('P1', 6), ('P2', 6), ('P4', 6)]
+mas_vendidos(1): [('P1', 6)]
+mas_vendidos(10): [('P1', 6), ('P2', 6), ('P4', 6), ('P3', 1)]
+total_vendido: 2491.68
+stock_bajo: [{'codigo': 'P3', 'nombre': 'Leche', 'precio': 3.0, 'stock': 2}]
+mas_vendidos con empate: [('P1', 2), ('P2', 2), ('P4', 2)]
+== ALMACEN ==
+cargar inexistente: False
+error='el archivo no existe'
+hayArchivo inexistente: False
+cargar json invalido: False
+error='archivo corrupto'
+cargar bytes invalidos: False
+error='archivo corrupto'
+guardar: True
+hayArchivo existente: True
+json guardado: {"contador": 2, "inventario": {"P1": {"codigo": "P1", "nombre": "Cafe Molido", "precio": 100.0, "stock": 94}, "P2": {"codigo": "P2", "nombre": "Azucar", "precio": 32.5, "stock": 40}, "P3": {"codigo": "P3", "nombre": "Leche", "precio": 3.0, "stock": 3}, "P4": {"codigo": "P4", "nombre": "Galletas", "precio": 250.0, "stock": 49}}, "ventas": [{"cantidad": 6, "cliente": "VIP01", "codigo": "P1", "descuento": 42.0, "folio": 1, "impuesto": 89.28, "nombre": "Cafe Molido", "subtotal": 600.0, "ticket": "TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nCafe Molido x6\nSubtotal: $600.0\nDescuento: -$42.0\nIVA: $89.28\nTOTAL: $647.28\n", "total": 647.28}, {"cantidad": 1, "cliente": "", "codigo": "P4", "descuento": 0, "folio": 2, "impuesto": 40.0, "nombre": "Galletas", "subtotal": 250.0, "ticket": "TIENDA LA ESQUINA\n----------------------------\nFolio: 2\nGalletas x1\nSubtotal: $250.0\nIVA: $40.0\nTOTAL: $290.0\n", "total": 290.0}]}
+claves del json: ['inventario', 'ventas', 'contador']
+json con indent=2: True
+cargar: True
+mismo objeto INVENTARIO: True
+mismo objeto VENTAS: True
+INVENTARIO={'P1': {'codigo': 'P1', 'nombre': 'Cafe Molido', 'precio': 100.0, 'stock': 94}, 'P2': {'codigo': 'P2', 'nombre': 'Azucar', 'precio': 32.5, 'stock': 40}, 'P3': {'codigo': 'P3', 'nombre': 'Leche', 'precio': 3.0, 'stock': 3}, 'P4': {'codigo': 'P4', 'nombre': 'Galletas', 'precio': 250.0, 'stock': 49}}
+VENTAS=[{'folio': 1, 'codigo': 'P1', 'nombre': 'Cafe Molido', 'cantidad': 6, 'subtotal': 600.0, 'descuento': 42.0, 'impuesto': 89.28, 'total': 647.28, 'cliente': 'VIP01', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nCafe Molido x6\nSubtotal: $600.0\nDescuento: -$42.0\nIVA: $89.28\nTOTAL: $647.28\n'}, {'folio': 2, 'codigo': 'P4', 'nombre': 'Galletas', 'cantidad': 1, 'subtotal': 250.0, 'descuento': 0, 'impuesto': 40.0, 'total': 290.0, 'cliente': '', 'ticket': 'TIENDA LA ESQUINA\n----------------------------\nFolio: 2\nGalletas x1\nSubtotal: $250.0\nIVA: $40.0\nTOTAL: $290.0\n'}]
+folio siguiente: 3
+cargar sin contador: True
+folio tras sin contador: 1
+== MENU ==
+returncode=0
+stdout:
+Bienvenido al gestor de la tienda La Esquina
+Datos cargados de datos_ejemplo.json
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: Codigo: Nombre: Precio: Eso no es un numero, intenta de nuevo.
+Precio: Stock inicial: Producto agregado.
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: Codigo: Nombre: Precio: Stock inicial: Error: el producto ya existe
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: Codigo: Nombre: Precio: Stock inicial: Error: codigo vacio
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: Codigo: Nombre: Precio: Stock inicial: Error: precio invalido
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: Codigo del producto: Cantidad: Codigo de cliente (enter si no tiene): TIENDA LA ESQUINA
+----------------------------
+Folio: 1
+Café de grano 500g x2
+Subtotal: $370.0
+IVA: $59.2
+TOTAL: $429.2
+
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: Codigo del producto: Cantidad: Codigo de cliente (enter si no tiene): TIENDA LA ESQUINA
+----------------------------
+Folio: 2
+Café de grano 500g x6
+Subtotal: $1110.0
+Descuento: -$133.2
+IVA: $156.29
+TOTAL: $1133.09
+
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: Codigo del producto: Cantidad: Eso no es un numero, intenta de nuevo.
+Cantidad: Codigo de cliente (enter si no tiene): Error: cantidad invalida
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: Codigo del producto: Cantidad: Codigo de cliente (enter si no tiene): Error: cantidad invalida
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: Codigo del producto: Cantidad: Codigo de cliente (enter si no tiene): Error: producto no existe
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: Codigo del producto: Cantidad: Codigo de cliente (enter si no tiene): Error: stock insuficiente
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: Codigo del producto: Cantidad: Total estimado (con IVA): $429.2
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: Codigo del producto: Cantidad: Error: cantidad invalida
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: Codigo del producto: Cantidad: Error: producto no existe
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: ===== INVENTARIO =====
+A001 | Café de grano 500g | $185.0 | stock: 4  <-- STOCK BAJO
+A002 | Azúcar 1kg | $32.5 | stock: 40
+A003 | Leche entera 1L | $26.0 | stock: 3  <-- STOCK BAJO
+B001 | Galletas de avena | $45.0 | stock: 18
+B002 | Chocolate en polvo 400g | $78.9 | stock: 2  <-- STOCK BAJO
+C001 | Jabón de tocador | $21.0 | stock: 25
+N01 | Producto nuevo | $12.5 | stock: 7
+Valor total del inventario: $3698.3
+
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: ===== RESUMEN DE VENTAS =====
+Folio 1: Café de grano 500g x2 = $429.2
+Folio 2: Café de grano 500g x6 = $1133.09
+Numero de ventas: 2
+Total del dia: $1562.29
+
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: A001 -> 8 unidades
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: OJO: Café de grano 500g solo tiene 4 unidades
+OJO: Leche entera 1L solo tiene 3 unidades
+OJO: Chocolate en polvo 400g solo tiene 2 unidades
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: Opcion no valida.
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: Opcion no valida.
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: Opcion no valida.
+
+1) Agregar producto
+2) Registrar venta
+3) Cotizar
+4) Reporte de inventario
+5) Resumen de ventas
+6) Mas vendidos
+7) Alertas de stock bajo
+8) Guardar y salir
+Opcion: Datos guardados. Hasta luego.
+
+stderr:
+
+json final: {"contador": 2, "inventario": {"A001": {"codigo": "A001", "nombre": "Caf\u00e9 de grano 500g", "precio": 185.0, "stock": 4}, "A002": {"codigo": "A002", "nombre": "Az\u00facar 1kg", "precio": 32.5, "stock": 40}, "A003": {"codigo": "A003", "nombre": "Leche entera 1L", "precio": 26.0, "stock": 3}, "B001": {"codigo": "B001", "nombre": "Galletas de avena", "precio": 45.0, "stock": 18}, "B002": {"codigo": "B002", "nombre": "Chocolate en polvo 400g", "precio": 78.9, "stock": 2}, "C001": {"codigo": "C001", "nombre": "Jab\u00f3n de tocador", "precio": 21.0, "stock": 25}, "N01": {"codigo": "N01", "nombre": "Producto nuevo", "precio": 12.5, "stock": 7}}, "ventas": [{"cantidad": 2, "cliente": "", "codigo": "A001", "descuento": 0, "folio": 1, "impuesto": 59.2, "nombre": "Caf\u00e9 de grano 500g", "subtotal": 370.0, "ticket": "TIENDA LA ESQUINA\n----------------------------\nFolio: 1\nCaf\u00e9 de grano 500g x2\nSubtotal: $370.0\nIVA: $59.2\nTOTAL: $429.2\n", "total": 429.2}, {"cantidad": 6, "cliente": "VIP01", "codigo": "A001", "descuento": 133.2, "folio": 2, "impuesto": 156.29, "nombre": "Caf\u00e9 de grano 500g", "subtotal": 1110.0, "ticket": "TIENDA LA ESQUINA\n----------------------------\nFolio: 2\nCaf\u00e9 de grano 500g x6\nSubtotal: $1110.0\nDescuento: -$133.2\nIVA: $156.29\nTOTAL: $1133.09\n", "total": 1133.09}]}
