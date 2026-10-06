@@ -1,4 +1,4 @@
-# CLAUDE.md — Reto de refactorización "La Esquina"
+﻿# CLAUDE.md — Reto de refactorización "La Esquina"
 
 ## 1. Descripción del proyecto
 
@@ -198,3 +198,39 @@ Para cada fase `Rn`:
 - Se borra también `import os` de `reportes.py`: ya no se usa (`F401`) y la
   auditoría no lo listó. Anótalo en la bitácora como código muerto.
 - No borres otros comentarios todavía (p. ej. el `TODO` de la burbuja se va en R13).
+
+---
+
+### Iteración 2 — R4, R5, R6
+
+**Lecciones de la iteración anterior:** ninguna registrada en la iteración 1 (R1-R3 sin incidencias).
+
+**General desde aquí:** los type hints se agregan **solo a las funciones que la fase
+toca**, no a todo el archivo (el resto es R24). Si conviertes un comentario
+`# hace X` de la primera línea de la función en docstring, hazlo solo en la función
+que tocas.
+
+**R4 — `main.py`**
+
+- Solo `temp2` → `respuesta` en `pedir_numero` y `len(bajos) == 0` → `not bajos`.
+  Las variables de `menu` (`c`, `n`, `p`, `op`, …) **no** se renombran aquí: se van
+  en R23.
+- Hint: `pedir_numero(mensaje: str) -> float`.
+
+**R5 — `actualizar_stock`**
+
+- Solo `aux` → `nuevo_stock` (+ hints). El mensaje y el orden de las validaciones no
+  cambian.
+
+**R6 — constantes en `gestor.py`**
+
+- Ubicación: arriba de `gestor.py`, después de los imports y antes del estado global.
+  Nombres: `UMBRAL_DESCUENTO_ALTO = 1000`, `TASA_DESCUENTO_ALTO = 0.10`,
+  `UMBRAL_DESCUENTO_MEDIO = 500`, `TASA_DESCUENTO_MEDIO = 0.05`, `TASA_IVA = 0.16`,
+  `PREFIJO_VIP = "VIP"`, `MONTO_MINIMO_VIP = 200`, `TASA_EXTRA_VIP = 0.02`.
+- **Solo se sustituyen literales**; la estructura de los `if` queda igual (se
+  simplifica en R18 y R19). El `3` y el `cliente[0:3]` del VIP se quedan como están
+  hasta R19.
+- No reescribas fórmulas: `base + base * TASA_IVA` **no** pasa a
+  `base * (1 + TASA_IVA)`, porque con flotantes el resultado puede cambiar en el
+  último decimal. Mismo orden de operaciones, solo cambia el nombre del número.
