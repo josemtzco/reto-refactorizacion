@@ -7,12 +7,12 @@ import reportes
 ARCHIVO = "datos_ejemplo.json"
 
 
-def pedir_numero(mensaje):
-    # pide un numero al usuario hasta que escriba algo valido
+def pedir_numero(mensaje: str) -> float:
+    """Pide un numero al usuario hasta que escriba algo valido."""
     while True:
-        temp2 = input(mensaje)
+        respuesta = input(mensaje)
         try:
-            return float(temp2)
+            return float(respuesta)
         except ValueError:
             print("Eso no es un numero, intenta de nuevo.")
 
@@ -68,7 +68,7 @@ def menu():
                 print(par[0], "->", par[1], "unidades")
         elif op == "7":
             bajos = reportes.productos_stock_bajo()
-            if len(bajos) == 0:
+            if not bajos:
                 print("No hay productos con stock bajo.")
             else:
                 for p in bajos:
