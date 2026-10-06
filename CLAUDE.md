@@ -114,12 +114,28 @@ def productos_stock_bajo() -> list[dict]:
 
 ## 5. Flujo de trabajo
 
-1. **Un cambio a la vez**: una sola refactorización pequeña y enfocada por iteración.
+El plan está en `docs/spec-driven-development/auditoria-calidad.md`: hallazgos, orden de
+ejecución y las **fases R1–R24**. Cada fase es una sola refactorización y termina en un
+solo commit. Ese historial es la evidencia de validación incremental (Criterio 3).
+
+Antes de la primera fase: crear `.venv`, instalar `requirements.txt` y guardar una
+salida de referencia (tickets, `resumen_ventas()`, mensajes de `ultimo_error`) con un
+script que no esté en `tests/` ni en `src/`.
+
+Para cada fase `Rn`:
+
+1. **Un cambio a la vez**: aplicar solo lo que define la fase; no mezclar otras mejoras.
+   Si una fase crece, dividirla en sub-fases (`R20a`, `R20b`) con su propio commit.
 2. Ejecutar `.venv\Scripts\python -m pytest` → todos en verde.
 3. Ejecutar `.venv\Scripts\python -m ruff check src` → sin errores nuevos
    (meta final: cero errores).
-4. Si algo falla, revertir o corregir antes de seguir; nunca acumular cambios rotos.
-5. **Commit** con mensaje descriptivo en español
-   (p. ej. `refactor(gestor): extraer cálculo de descuento`).
-6. Registrar el cambio en `docs/bitacora_josejuanmartinezmorales.md`
-   (prompt, cambio, justificación, resultado de tests).
+4. Comparar con la salida de referencia → idéntica. Si la fase toca `main.py`,
+   probar además el menú a mano.
+5. Si algo falla, revertir o corregir antes de seguir; nunca hacer commit de una fase
+   en rojo ni acumular cambios rotos.
+6. Registrar la fase en `docs/bitacora_josejuanmartinezmorales.md` (fila `n` = fase
+   `Rn`: prompt, cambio, justificación, resultado de tests).
+7. **Commit** del código y la bitácora juntos, con el formato
+   `refactor(Rn): <descripción en español>`
+   (p. ej. `refactor(R21): extraer cálculo de montos de la venta`).
+   Los commits que no son de refactorización usan otro tipo (`docs:`, `chore:`).

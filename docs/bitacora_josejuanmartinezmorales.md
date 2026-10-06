@@ -1,8 +1,9 @@
 # Bitácora de refactorización
 
-**Nombre:**
-**Matrícula:**
-**Fecha:**
+**Nombre:** Jose Juan Martinez Morales
+
+**Matrícula:** 
+**Fecha:** Octubre 05, 2026
 
 Registra aquí **cada refactorización** que realices con Claude Code. Copia el
 prompt tal cual lo escribiste (o un resumen fiel si fue una conversación larga),
