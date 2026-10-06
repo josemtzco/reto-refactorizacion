@@ -33,10 +33,10 @@ def reiniciar_sistema():
     ultimo_error = ""
 
 
-def agregarProducto(codigo, nombre, precio, stock):
-    # valida los datos y da de alta un producto en el inventario
+def agregarProducto(codigo: str, nombre: str, precio: float, stock: int) -> bool:
+    """Valida los datos y da de alta un producto en el inventario."""
     global ultimo_error
-    if codigo is None or codigo == "":
+    if codigo in (None, ""):
         ultimo_error = "codigo vacio"
         return False
     if codigo in INVENTARIO:
@@ -48,12 +48,12 @@ def agregarProducto(codigo, nombre, precio, stock):
     if stock < 0:
         ultimo_error = "stock invalido"
         return False
-    x = {}
-    x["codigo"] = codigo
-    x["nombre"] = nombre
-    x["precio"] = precio
-    x["stock"] = stock
-    INVENTARIO[codigo] = x
+    INVENTARIO[codigo] = {
+        "codigo": codigo,
+        "nombre": nombre,
+        "precio": precio,
+        "stock": stock,
+    }
     return True
 
 
