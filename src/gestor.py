@@ -90,6 +90,15 @@ def buscarProducto(texto: str) -> list[dict]:
     ]
 
 
+def _descuento_por_volumen(subtotal: float) -> float:
+    """Regresa el descuento que corresponde al subtotal (0 si no hay)."""
+    if subtotal >= UMBRAL_DESCUENTO_ALTO:
+        return subtotal * TASA_DESCUENTO_ALTO
+    if subtotal >= UMBRAL_DESCUENTO_MEDIO:
+        return subtotal * TASA_DESCUENTO_MEDIO
+    return 0
+
+
 def registrar_venta(codigo, cantidad, cliente=""):
     """Registra una venta completa.
 
@@ -120,14 +129,7 @@ def registrar_venta(codigo, cantidad, cliente=""):
     # calculo del subtotal
     aux = temp2["precio"] * cantidad
     # descuentos por volumen de compra
-    desc = 0
-    if aux >= UMBRAL_DESCUENTO_ALTO:
-        desc = aux * TASA_DESCUENTO_ALTO
-    else:
-        if aux >= UMBRAL_DESCUENTO_MEDIO:
-            desc = aux * TASA_DESCUENTO_MEDIO
-        else:
-            desc = 0
+    desc = _descuento_por_volumen(aux)
     # los clientes cuyo codigo empieza con VIP tienen un extra,
     # pero solo si su compra (ya con descuento) pasa de cierto monto
     if cliente != "" and cliente is not None:
@@ -178,12 +180,7 @@ def cotizar(codigo, cantidad):
         ultimo_error = "cantidad invalida"
         return None
     aux = INVENTARIO[codigo]["precio"] * cantidad
-    desc = 0
-    if aux >= UMBRAL_DESCUENTO_ALTO:
-        desc = aux * TASA_DESCUENTO_ALTO
-    else:
-        if aux >= UMBRAL_DESCUENTO_MEDIO:
-            desc = aux * TASA_DESCUENTO_MEDIO
+    desc = _descuento_por_volumen(aux)
     base = aux - desc
     total = base + base * TASA_IVA
     return round(total, 2)
