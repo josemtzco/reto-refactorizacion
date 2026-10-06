@@ -81,13 +81,13 @@ def actualizar_stock(codigo: str, cantidad: int) -> bool:
     return True
 
 
-def buscarProducto(texto):
-    # busca productos cuyo nombre contenga el texto (sin importar mayusculas)
-    temp2 = []
-    for k in INVENTARIO:
-        if texto.lower() in INVENTARIO[k]["nombre"].lower():
-            temp2.append(INVENTARIO[k])
-    return temp2
+def buscarProducto(texto: str) -> list[dict]:
+    """Busca productos cuyo nombre contenga el texto (sin importar mayusculas)."""
+    return [
+        producto
+        for producto in INVENTARIO.values()
+        if texto.lower() in producto["nombre"].lower()
+    ]
 
 
 def registrar_venta(codigo, cantidad, cliente=""):
