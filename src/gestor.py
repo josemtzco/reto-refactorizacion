@@ -99,6 +99,11 @@ def _descuento_por_volumen(subtotal: float) -> float:
     return 0
 
 
+def _aplica_vip(cliente: str | None, base: float) -> bool:
+    """Dice si el cliente es VIP y su compra (ya con descuento) pasa del minimo."""
+    return bool(cliente) and cliente.startswith(PREFIJO_VIP) and base > MONTO_MINIMO_VIP
+
+
 def registrar_venta(codigo, cantidad, cliente=""):
     """Registra una venta completa.
 
@@ -132,11 +137,8 @@ def registrar_venta(codigo, cantidad, cliente=""):
     desc = _descuento_por_volumen(aux)
     # los clientes cuyo codigo empieza con VIP tienen un extra,
     # pero solo si su compra (ya con descuento) pasa de cierto monto
-    if cliente != "" and cliente is not None:
-        if len(cliente) >= 3:
-            if cliente[0:3] == PREFIJO_VIP:
-                if aux - desc > MONTO_MINIMO_VIP:
-                    desc = desc + aux * TASA_EXTRA_VIP
+    if _aplica_vip(cliente, aux - desc):
+        desc = desc + aux * TASA_EXTRA_VIP
     base = aux - desc
     impuesto = base * TASA_IVA
     total = round(base + impuesto, 2)
