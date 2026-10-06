@@ -104,6 +104,24 @@ def _aplica_vip(cliente: str | None, base: float) -> bool:
     return bool(cliente) and cliente.startswith(PREFIJO_VIP) and base > MONTO_MINIMO_VIP
 
 
+def _calcular_montos(
+    subtotal: float, cliente: str | None
+) -> tuple[float, float, float]:
+    """Regresa (descuento, impuesto, total) de una venta.
+
+    El total sale redondeado; descuento e impuesto sin redondear.
+    """
+    descuento = _descuento_por_volumen(subtotal)
+    # los clientes cuyo codigo empieza con VIP tienen un extra,
+    # pero solo si su compra (ya con descuento) pasa de cierto monto
+    if _aplica_vip(cliente, subtotal - descuento):
+        descuento = descuento + subtotal * TASA_EXTRA_VIP
+    base = subtotal - descuento
+    impuesto = base * TASA_IVA
+    total = round(base + impuesto, 2)
+    return descuento, impuesto, total
+
+
 def registrar_venta(
     codigo: str | None, cantidad: int | None, cliente: str | None = ""
 ) -> dict | None:
@@ -128,17 +146,8 @@ def registrar_venta(
     if producto["stock"] < cantidad:
         ultimo_error = "stock insuficiente"
         return None
-    # calculo del subtotal
-    aux = producto["precio"] * cantidad
-    # descuentos por volumen de compra
-    desc = _descuento_por_volumen(aux)
-    # los clientes cuyo codigo empieza con VIP tienen un extra,
-    # pero solo si su compra (ya con descuento) pasa de cierto monto
-    if _aplica_vip(cliente, aux - desc):
-        desc = desc + aux * TASA_EXTRA_VIP
-    base = aux - desc
-    impuesto = base * TASA_IVA
-    total = round(base + impuesto, 2)
+    subtotal = producto["precio"] * cantidad
+    descuento, impuesto, total = _calcular_montos(subtotal, cliente)
     # descontar del inventario
     producto["stock"] = producto["stock"] - cantidad
     contador_ventas = contador_ventas + 1
@@ -147,8 +156,8 @@ def registrar_venta(
     venta["codigo"] = codigo
     venta["nombre"] = producto["nombre"]
     venta["cantidad"] = cantidad
-    venta["subtotal"] = round(aux, 2)
-    venta["descuento"] = round(desc, 2)
+    venta["subtotal"] = round(subtotal, 2)
+    venta["descuento"] = round(descuento, 2)
     venta["impuesto"] = round(impuesto, 2)
     venta["total"] = total
     venta["cliente"] = cliente
@@ -160,7 +169,7 @@ def registrar_venta(
     t = t + "Folio: " + str(venta["folio"]) + "\n"
     t = t + venta["nombre"] + " x" + str(cantidad) + "\n"
     t = t + "Subtotal: $" + str(venta["subtotal"]) + "\n"
-    if desc > 0:
+    if descuento > 0:
         t = t + "Descuento: -$" + str(venta["descuento"]) + "\n"
     t = t + "IVA: $" + str(venta["impuesto"]) + "\n"
     t = t + "TOTAL: $" + str(venta["total"]) + "\n"
