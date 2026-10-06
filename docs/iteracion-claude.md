@@ -169,7 +169,9 @@ que tocas.
 
 ### Iteración 5 — R13, R14, R15
 
-**Lecciones de la iteración anterior:** *(las completa el agente)*
+**Lecciones de la iteración anterior:** ninguna de código en la iteración 4 (R10-R12
+sin incidencias). Nota de proceso de la iteración 3: un `Remove-Item` encadenado con
+otros comandos fue bloqueado por el sandbox; ejecuta cada paso por separado.
 
 **R13 — `sorted` en `mas_vendidos`**
 

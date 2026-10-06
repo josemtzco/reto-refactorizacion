@@ -287,3 +287,36 @@ que tocas.
 - `def formatear_dinero(monto: float) -> str:` y renombrar sus 4 usos.
 - Se permite `f"${round(monto, 2)}"` (da el mismo texto que `"$" + str(...)`).
   Prohibido `:.2f`: cambiaría `$23.2` por `$23.20`.
+
+---
+
+### Iteración 5 — R13, R14, R15
+
+**Lecciones de la iteración anterior:** ninguna de código en la iteración 4 (R10-R12
+sin incidencias). Nota de proceso de la iteración 3: un `Remove-Item` encadenado con
+otros comandos fue bloqueado por el sandbox; ejecuta cada paso por separado.
+
+**R13 — `sorted` en `mas_vendidos`**
+
+- Conteo: `conteo[codigo] = conteo.get(codigo, 0) + venta["cantidad"]`.
+- Orden: `sorted(conteo.items(), key=lambda par: par[1], reverse=True)[:n]`.
+  `reverse=True` respeta el orden original en los empates, igual que la burbuja (que
+  solo intercambia con `<`). El caso de empate del script de referencia lo confirma.
+- Se borra el comentario `TODO` de la burbuja. Hints: `n: int = 3` y
+  `-> list[tuple[str, int]]`.
+
+**R14 — f-strings en reportes**
+
+- Solo `reporte_inventario` y `resumen_ventas`. Nombres: `s` → `reporte`,
+  `aux` → `valor_total`, `t` → `total_dia`, `p` → `producto`, `v` → `venta`.
+- Se mantienen el bucle, el `print(...)` **y** el `return` del texto.
+- No reutilices `total_vendido()` dentro de `resumen_ventas`: redondea en otro punto
+  y mezclaría dos cambios.
+- Ojo con `line-length = 88`: si una f-string no cabe, pártela en dos líneas.
+
+**R15 — dict literal en `agregarProducto`**
+
+- El nombre `agregarProducto` **no** cambia.
+- `codigo in (None, "")`, **no** `not codigo` (con `0` cambiaría el resultado; el
+  script de referencia lo prueba).
+- Mismo orden de validación: código vacío → ya existe → precio → stock.
